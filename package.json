@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^8.1.2",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.8",
     "sass": "^1.45.0",
