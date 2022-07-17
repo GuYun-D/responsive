@@ -12,3 +12,17 @@ const { width } = useWindowSize()
 export const isMobileTerminal = computed(() => {
   return width.value < PC_DEVICE_WIDTH
 })
+
+/**
+ * @description 动态计算REM的值
+ * @description 计算方法：屏幕宽度 / 10
+ */
+export const useREM = () => {
+  const html = document.documentElement
+  const MAX_FONT_SIZE = 40
+  // 监听到html文档被解析完成
+  document.addEventListener('DOMContentLoaded', () => {
+    const fontSize = window.innerWidth / 10
+    html.style.fontSize = fontSize >= MAX_FONT_SIZE ? MAX_FONT_SIZE + 'px' : fontSize + 'px'
+  })
+}
