@@ -1,7 +1,11 @@
 <template>
-  <div>我是首页</div>
+  <div>
+    <Navgition></Navgition>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Navgition from './components/navigation/index.vue'
+</script>
 
 <style lang="scss" scoped></style>
