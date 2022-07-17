@@ -1,6 +1,6 @@
 <template>
   <svg aria-hidden="true">
-    <use :xlink:href="svgIcon" :class="fillClass" :fill="color" />
+    <use :xlink:href="symbolId" :class="fillClass" :fill="color" />
   </svg>
 </template>
 
@@ -16,7 +16,7 @@ const props = defineProps({
   fillClass: String
 })
 
-const svgIcon = computed(() => `#icon-${props.name}`)
+const symbolId = computed(() => `#icon-${props.name}`)
 </script>
 
 <style lang="scss" scoped></style>
