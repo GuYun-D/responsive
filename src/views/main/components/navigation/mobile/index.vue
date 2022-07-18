@@ -12,6 +12,7 @@
       ></li>
       <!-- 按钮 -->
       <li
+        @click="onShowPopup"
         class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white"
       >
         <m-svg-icon name="hamburger" class="w-1.5 h-1.5"></m-svg-icon>
@@ -29,6 +30,10 @@
         {{ item.name }}
       </li>
     </ul>
+
+    <m-popup v-model="isVisiable">
+      我草类
+    </m-popup>
   </div>
 </template>
 
@@ -45,6 +50,8 @@ defineProps({
 })
 
 const currentCategoryIndex = ref(0)
+const isVisiable = ref(false)
+
 const ulRef = ref()
 let navItemRefs = []
 const sliderStyle = ref({
@@ -85,6 +92,10 @@ watch(
     }
   }
 )
+
+const onShowPopup = () => {
+  isVisiable.value = true
+}
 </script>
 
 <style lang="scss" scoped></style>
