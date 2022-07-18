@@ -8,6 +8,7 @@
 <script setup>
 import MobileNavigationVue from './mobile/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { ALL_CATEGORY_ITEM } from '@/constants'
 import { getCategory } from '@/api/category'
 import { ref } from '@vue/reactivity'
 
@@ -15,6 +16,7 @@ const categoryDate = ref()
 const getCategoryData = async () => {
   const { category } = await getCategory()
   categoryDate.value = category
+  categoryDate.value.unshift(ALL_CATEGORY_ITEM)
 }
 
 getCategoryData()

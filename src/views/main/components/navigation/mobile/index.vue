@@ -49,7 +49,7 @@ const ulRef = ref()
 let navItemRefs = []
 const sliderStyle = ref({
   transform: 'translateX(0px)',
-  width: '60px'
+  width: '52px'
 })
 
 const setNavItemRef = (navItem) => {
