@@ -32,7 +32,7 @@
     </ul>
 
     <m-popup v-model="isVisiable">
-      我草类
+      <MenuVue @nav-click="onNavItemClick" :categorys="data"></MenuVue>
     </m-popup>
   </div>
 </template>
@@ -41,6 +41,7 @@
 import { ref } from '@vue/reactivity'
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, watch } from '@vue/runtime-core'
+import MenuVue from '../../menu/index.vue'
 
 defineProps({
   data: {
@@ -67,6 +68,7 @@ const setNavItemRef = (navItem) => {
 
 const onNavItemClick = (index) => {
   currentCategoryIndex.value = index
+  isVisiable.value = false
 }
 
 onBeforeUpdate(() => {
