@@ -14,6 +14,16 @@
       class="w-2 h-2 animate-spin mr-1"
       name="loading"
     ></my-svg-icon>
+
+    <m-svg-icon
+      :class="sizeEnum[sizeKey]"
+      v-if="icon"
+      :name="icon"
+      :color="iconColor"
+      :fillClass="iconClass"
+    ></m-svg-icon>
+
+    <slot v-else></slot>
   </button>
 </template>
 
@@ -21,7 +31,7 @@
 import { computed } from '@vue/runtime-core'
 
 const typeEnum = {
-  primary: 'text-white bg-xinc-800 hover:bg-zinc-800 hover:bg-zinc-900',
+  primary: 'text-white bg-zinc-800 hover:bg-zinc-800 hover:bg-zinc-900',
   main: 'text-white bg-main hover:bg-hover-main active:bg-main',
   info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
 }
@@ -69,7 +79,7 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator(val) {
-      const keys = Object.keys(sizeEnum).filter((item) => !item.include('icon'))
+      const keys = Object.keys(sizeEnum).filter((item) => !item.includes('icon'))
       const result = keys.includes(val)
       if (!result) {
         throw new Error(`m-button组件的size必须是${keys.join('、')}中的一个`)

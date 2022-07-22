@@ -16,7 +16,7 @@ module.exports = {
         header: '72px',
         main: 'calc(100vh - 72px)'
       },
-      color: {
+      colors: {
         main: '#f44c58',
         'hover-main': '#f32836'
       }
