@@ -21,15 +21,20 @@
       <div
         class="group-hover:opacity-100 opacity-0 h-1.5 w-[1px] absolute top-[50%] right-[62px] translate-y-[-50%] duration-500 bg-zinc-200"
       ></div>
-      <!-- drapdown -->
-      <transition name="slider">
-        <div
-          class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-2xl"
-        >
-          <slot name="drapdown"></slot>
-        </div>
-      </transition>
+      <m-button
+        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-full"
+        icon="search"
+        icon-color="#fff"
+      ></m-button>
     </div>
+    <!-- drapdown -->
+    <transition name="slider">
+      <div
+        class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-2xl"
+      >
+        <slot name="drapdown"></slot>
+      </div>
+    </transition>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <button
+    @click.stop="onBtnClick"
     class="text-sm text-center rounded duration-500 flex justify-center items-center"
     :class="[
       typeEnum[type],
@@ -16,19 +17,20 @@
     ></my-svg-icon>
 
     <m-svg-icon
-      :class="sizeEnum[sizeKey]"
+      :class="sizeEnum[sizeKey].icon"
       v-if="icon"
       :name="icon"
       :color="iconColor"
       :fillClass="iconClass"
     ></m-svg-icon>
-
+    
     <slot v-else></slot>
   </button>
 </template>
 
 <script>
 import { computed } from '@vue/runtime-core'
+const EVENTS_CLICK = 'click'
 
 const typeEnum = {
   primary: 'text-white bg-zinc-800 hover:bg-zinc-800 hover:bg-zinc-900',
@@ -51,7 +53,7 @@ const sizeEnum = {
     icon: ''
   },
 
-  'icon-default': {
+  'icon-small': {
     button: 'w-3 h-3',
     icon: 'w-1.5 h-1.5'
   }
@@ -79,7 +81,9 @@ const props = defineProps({
     type: String,
     default: 'default',
     validator(val) {
-      const keys = Object.keys(sizeEnum).filter((item) => !item.includes('icon'))
+      const keys = Object.keys(sizeEnum).filter(
+        (item) => !item.includes('icon')
+      )
       const result = keys.includes(val)
       if (!result) {
         throw new Error(`m-button组件的size必须是${keys.join('、')}中的一个`)
@@ -97,9 +101,16 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits([EVENTS_CLICK])
+
 const sizeKey = computed(() => {
   return props.icon ? 'icon-' + props.size : props.size
 })
+
+const onBtnClick = () => {
+  if (props.loading) return
+  emits(EVENTS_CLICK)
+}
 </script>
 
 <style lang="scss" scoped></style>
