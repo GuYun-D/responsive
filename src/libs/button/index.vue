@@ -10,11 +10,11 @@
       }
     ]"
   >
-    <my-svg-icon
+    <m-svg-icon
       v-if="loading"
       class="w-2 h-2 animate-spin mr-1"
       name="loading"
-    ></my-svg-icon>
+    ></m-svg-icon>
 
     <m-svg-icon
       :class="sizeEnum[sizeKey].icon"
