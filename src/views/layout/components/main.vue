@@ -1,7 +1,3 @@
 <template>
-  <div>主营</div>
+  <router-view></router-view>
 </template>
-
-<script setup></script>
-
-<style lang="scss" scoped></style>

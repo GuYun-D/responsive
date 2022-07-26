@@ -19,7 +19,7 @@
       </li>
       <li
         :ref="setNavItemRef"
-        v-for="(item, index) in data"
+        v-for="(item, index) in $store.getters.category"
         :key="item.id"
         :class="{
           ' text-zinc-100': currentCategoryIndex === index
@@ -32,7 +32,7 @@
     </ul>
 
     <m-popup v-model="isVisiable">
-      <MenuVue @nav-click="onNavItemClick" :categorys="data"></MenuVue>
+      <MenuVue @nav-click="onNavItemClick"></MenuVue>
     </m-popup>
   </div>
 </template>
@@ -42,13 +42,6 @@ import { ref } from '@vue/reactivity'
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, watch } from '@vue/runtime-core'
 import MenuVue from '../../menu/index.vue'
-
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
 
 const currentCategoryIndex = ref(0)
 const isVisiable = ref(false)

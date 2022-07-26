@@ -4,7 +4,7 @@
       <ul class="overflow-y-scroll">
         <li
           class="text-lg text-zinc-900 px-1 py-1.5 duration-100 active:bg-zinc-100"
-          v-for="(item, index) in categorys"
+          v-for="(item, index) in $store.getters.category"
           :key="item.id"
           @click="$emit('nav-click', index)"
         >
@@ -16,12 +16,6 @@
 </template>
 
 <script setup>
-defineProps({
-  categorys: {
-    type: Array,
-    required: true
-  }
-})
 
 defineEmits(['nav-click'])
 </script>
