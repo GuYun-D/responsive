@@ -12,7 +12,7 @@
         :style="contentStyle"
         ref="contentRef"
         v-if="isVisiable"
-        class="absolute p-1 z-20 bg-white border rounded-md duration-500"
+        class=" dark:bg-zinc-900 dark:border-zinc-700 absolute p-1 z-20 bg-white border rounded-md duration-500"
       >
         <slot></slot>
       </div>

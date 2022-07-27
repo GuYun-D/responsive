@@ -1,16 +1,18 @@
 import { createStore } from 'vuex'
+import craetePersistedstate from 'vuex-persistedstate'
 import getters from './getters'
 import category from './modules/category'
-import craetePersistedstate from 'vuex-persistedstate'
+import theme from './modules/theme'
 
 const store = createStore({
   getters,
   modules: {
-    category
+    category,
+    theme
   },
   plugins: [craetePersistedstate({
     key: '', // 指定保存到 localstorage 中的 key
-    paths: ['category'] // 需要保存的模块
+    paths: ['category', 'theme'] // 需要保存的模块
   })]
 })
 

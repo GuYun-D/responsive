@@ -2,7 +2,7 @@
   <m-popover class="flex items-center" placement="bottom-left">
     <template #reference>
       <div
-        class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
+        class="dark:hover:bg-zinc-900 relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
       >
         <img
           class="w-3 h-3 rounded"
@@ -19,6 +19,7 @@
         <m-svg-icon
           class="w-1.5 h-1.5 absolute right-[16px] bottom-0"
           name="vip"
+          fileClass="fill-zinc-900 dark:fill-zinc-300"
         >
         </m-svg-icon>
       </div>
@@ -26,16 +27,18 @@
 
     <div class="w-[140px] overflow-hidden">
       <div
-        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
+        class="flex dark:hover:bg-zinc-800 items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
         v-for="item in menus"
         :key="item.id"
       >
         <m-svg-icon
+          fileClass="fill-zinc-900 dark:fill-zinc-200"
           :name="item.icon"
-          class="w-1.5 h-1.5 mr-1"
-          fileClass="fill-zinc-900"
+          class="w-1.5 h-1.5 mr-1 "
         ></m-svg-icon>
-        <span class="text-zinc-800 text-sm">{{ item.title }}</span>
+        <span class="dark:text-zinc-300 text-zinc-800 text-sm">{{
+          item.title
+        }}</span>
       </div>
     </div>
   </m-popover>

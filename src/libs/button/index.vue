@@ -23,7 +23,7 @@
       :color="iconColor"
       :fillClass="iconClass"
     ></m-svg-icon>
-    
+
     <slot v-else></slot>
   </button>
 </template>
@@ -33,9 +33,10 @@ import { computed } from '@vue/runtime-core'
 const EVENTS_CLICK = 'click'
 
 const typeEnum = {
-  primary: 'text-white bg-zinc-800 hover:bg-zinc-800 hover:bg-zinc-900',
-  main: 'text-white bg-main hover:bg-hover-main active:bg-main',
-  info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
+  primary:
+    'text-white bg-zinc-800 hover:bg-zinc-800 hover:bg-zinc-900 dark:bg-zince-900 dark:hover:bg-zinc-700 dark:active:bg-zinc-700',
+  main: 'dark:bg-zince-900 dark:hover:bg-zinc-700 dark:active:bg-zinc-700 text-white bg-main hover:bg-hover-main active:bg-main',
+  info: 'text-zinc-800 dark:text-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
 }
 
 const sizeEnum = {
