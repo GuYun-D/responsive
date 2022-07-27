@@ -59,7 +59,6 @@ const store = useStore()
  * @description 切换主题
  */
 const changeTheme = (theme) => {
-  console.log(theme)
   store.commit('theme/changeThemeType', theme.type)
 }
 
