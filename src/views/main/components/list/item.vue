@@ -1,9 +1,14 @@
 <template>
-  <div
-    class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1"
-  >
+  <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
     <div class="relative w-full rounded cursor-zoom-in group">
-      <img class="w-full rounded bg-transparent" :src="data.photo" alt="" />
+      <img
+        class="w-full rounded bg-transparent"
+        :style="{
+          height: (width / data.width) * data.height + 'px'
+        }"
+        :src="data.photo"
+        alt=""
+      />
       <!-- hover mask -->
       <div
         class="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 left-0 rounded duration-300 group-hover:opacity-100 xl:block"
@@ -44,7 +49,7 @@
     <!-- 作者 -->
     <div class="flex items-center mt-1 px-1">
       <img class="h-2 w-2 rounded-full" :src="data.avatar" alt="" />
-      <span class="text-sm text-zinc-500 ml-1"> {{data.author}} </span>
+      <span class="text-sm text-zinc-500 ml-1"> {{ data.author }} </span>
     </div>
   </div>
 </template>
@@ -54,6 +59,9 @@ defineProps({
   data: {
     type: Object,
     required: true
+  },
+  width: {
+    type: Number
   }
 })
 </script>

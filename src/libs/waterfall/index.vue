@@ -103,7 +103,7 @@ const useContainerWidth = () => {
     parseFloat(paddingLeft) -
     parseFloat(paddingRight)
 
-    console.log(containerWidth.value);
+  console.log(containerWidth.value)
 }
 
 /**
@@ -214,7 +214,7 @@ const reset = () => {
     props.data.forEach((item) => {
       item._style = null
     })
-  }, 200)
+  }, 250)
 }
 
 watch(
@@ -241,7 +241,9 @@ watch(
 watch(
   () => props.column,
   () => {
-    columnWidth.value = 0
+    if (props.picturePreReading) {
+      columnWidth.value = 0
+    }
     reset()
   }
 )

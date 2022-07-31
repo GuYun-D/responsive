@@ -4,10 +4,10 @@
     :data="pexelsList"
     :nodekey="id"
     :column="isMobileTerminal ? 2 : 5"
-    :picturePreReading="true"
+    :picturePreReading="false"
   >
     <template v-slot="{ item, width }">
-      <Item :data="item"></Item>
+      <Item :data="item" :width="width"></Item>
     </template>
   </m-waterfall>
 </template>
