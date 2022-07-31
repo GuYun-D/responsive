@@ -51,7 +51,7 @@ const getPexlesData = async () => {
   }
 
   // 判断数据是否加载完成
-  if (pexelsList.value.length === res.total) {
+  if (pexelsList.value.length >= res.total) {
     isFinished.value = true
   }
 

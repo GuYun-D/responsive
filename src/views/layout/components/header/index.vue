@@ -4,6 +4,7 @@
   >
     <div class="flex items-center">
       <img
+          v-lazy
         class="h-4 cursor-pointer mr-2"
         @click="toHome"
         src="https://img1.baidu.com/it/u=472952010,194694002&fm=253&fmt=auto&app=138&f=JPEG?w=240&h=180"

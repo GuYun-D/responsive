@@ -5,6 +5,7 @@
         class="dark:hover:bg-zinc-900 relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
       >
         <img
+          v-lazy
           class="w-3 h-3 rounded"
           src="https://img0.baidu.com/it/u=1776260030,3350744143&fm=253&fmt=auto&app=138&f=JPEG?w=250&h=300"
           alt=""
@@ -34,7 +35,7 @@
         <m-svg-icon
           fileClass="fill-zinc-900 dark:fill-zinc-200"
           :name="item.icon"
-          class="w-1.5 h-1.5 mr-1 "
+          class="w-1.5 h-1.5 mr-1"
         ></m-svg-icon>
         <span class="dark:text-zinc-300 text-zinc-800 text-sm">{{
           item.title
