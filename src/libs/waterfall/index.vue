@@ -25,8 +25,15 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { getAllImg, getImgElement, onComplateImgs } from './utils'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import {
+  getAllImg,
+  getImgElement,
+  getMaxHeight,
+  getMinHeight,
+  getMinHeightColumn,
+  onComplateImgs
+} from './utils'
 
 const props = defineProps({
   // 数据源
@@ -78,6 +85,8 @@ const useColumnHeightObj = () => {
   }
 }
 
+// useColumnHeightObj()
+
 /**
  * @description 计算容器的宽度
  */
@@ -116,8 +125,42 @@ onMounted(() => {
   useColumnWidth()
 })
 
+/**
+ * @description 返回下一个item的 left
+ */
+const getImgLeft = () => {
+  const column = getMinHeightColumn(columnHeightObj.value)
+  return (
+    column * (columnWidth.value + props.columnSpacing) + containerLeft.value
+  )
+}
+
+/**
+ * @description 计算下一个的top
+ */
+const getItemTop = () => {
+  return getMinHeight(columnHeightObj.value)
+}
+
+/**
+ * @description 计算图片的位置
+ */
 const useItemLocation = () => {
-  console.log('获取到了', itemHeights)
+  props.data.forEach((item, index) => {
+    if (item._style) {
+      return
+    }
+
+    item._style = {}
+    item._style.left = getImgLeft()
+    item._style.top = getItemTop()
+    // 指定的列进行高度的自增
+    increasingHeight(index)
+    console.log('艹', item)
+  })
+
+  // 指定容器的高度
+  containerHeight.value = getMaxHeight(columnHeightObj.value)
 }
 
 /**
@@ -155,10 +198,20 @@ const useItemHeight = () => {
   useItemLocation()
 }
 
+const increasingHeight = (index) => {
+  const minHeightColumn = getMinHeightColumn(columnHeightObj.value)
+  columnHeightObj.value[minHeightColumn] +=
+    itemHeights[index] + props.rowSpacing
+}
+
 watch(
   () => props.data,
   (val) => {
     nextTick(() => {
+      const resetColumnHeight = val.every((item) => !item._style)
+      if (resetColumnHeight) {
+        useColumnHeightObj()
+      }
       if (props.picturePreReading) {
         waitImageComplate()
       } else {
@@ -171,6 +224,12 @@ watch(
     immediate: true
   }
 )
+
+onUnmounted(() => {
+  props.data.forEach((item) => {
+    delete item._style
+  })
+})
 </script>
 
 <style lang="scss" scoped></style>

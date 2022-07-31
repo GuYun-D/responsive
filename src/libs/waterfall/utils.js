@@ -40,3 +40,29 @@ export const onComplateImgs = (imgs) => {
 
   return Promise.all(promiseAll)
 }
+
+/**
+ * @description 返回列高对象中的最小高度所在的列
+ */
+export const getMinHeight = (columnHeightObj) => {
+  const columnHeightArr = Object.values(columnHeightObj)
+  return Math.min(...columnHeightArr)
+}
+
+/**
+ * @description 获取容器中的最大的高度
+ */
+export const getMaxHeight = (columnHeightObj) => {
+  return Math.max(...Object.values(columnHeightObj))
+}
+
+/**
+ * @description 返回列高对象中最小高度所在的列
+ */
+export const getMinHeightColumn = (columnHeightObj) => {
+  // debugger
+  const currentMinHeight = getMinHeight(columnHeightObj)
+  return Object.keys(columnHeightObj).find(key => {
+    return columnHeightObj[key] === currentMinHeight
+  })
+}
