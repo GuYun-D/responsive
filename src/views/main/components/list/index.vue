@@ -1,22 +1,22 @@
 <template>
-  <div class="m-5">
-    <m-waterfall
-      :data="pexelsList"
-      :nodekey="id"
-      :column="5"
-      :picturePreReading="true"
-    >
-      <template v-slot="{ item, width }">
-        <Item :data="item"></Item>
-      </template>
-    </m-waterfall>
-  </div>
+  <m-waterfall
+    class="px-1 w-full"
+    :data="pexelsList"
+    :nodekey="id"
+    :column="isMobileTerminal ? 2 : 5"
+    :picturePreReading="true"
+  >
+    <template v-slot="{ item, width }">
+      <Item :data="item"></Item>
+    </template>
+  </m-waterfall>
 </template>
 
 <script setup>
 import { getPexlesListApi } from '@/api/pexels'
 import Item from './item.vue'
 import { ref } from 'vue'
+import { isMobileTerminal } from '@/utils/flexible'
 
 const query = {
   page: 1,
