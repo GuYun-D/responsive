@@ -102,6 +102,8 @@ const useContainerWidth = () => {
     containerRef.value.offsetWidth -
     parseFloat(paddingLeft) -
     parseFloat(paddingRight)
+
+    console.log(containerWidth.value);
 }
 
 /**
@@ -156,7 +158,6 @@ const useItemLocation = () => {
     item._style.top = getItemTop()
     // 指定的列进行高度的自增
     increasingHeight(index)
-    console.log('艹', item)
   })
 
   // 指定容器的高度
@@ -204,6 +205,18 @@ const increasingHeight = (index) => {
     itemHeights[index] + props.rowSpacing
 }
 
+/**
+ * @description 重新构建瀑布流
+ */
+const reset = () => {
+  setTimeout(() => {
+    useColumnWidth()
+    props.data.forEach((item) => {
+      item._style = null
+    })
+  }, 200)
+}
+
 watch(
   () => props.data,
   (val) => {
@@ -222,6 +235,14 @@ watch(
   {
     deep: true,
     immediate: true
+  }
+)
+
+watch(
+  () => props.column,
+  () => {
+    columnWidth.value = 0
+    reset()
   }
 )
 
