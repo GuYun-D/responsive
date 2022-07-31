@@ -1,7 +1,9 @@
 <template>
   <div class="h-screen">
     <Header class="h-header"></Header>
-    <Main class="h-main"></Main>
+    <div class="h-main">
+      <Main></Main>
+    </div>
     <Floating></Floating>
   </div>
 </template>
