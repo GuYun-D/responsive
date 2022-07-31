@@ -66,7 +66,7 @@ const containerRef = ref(null) // 容器的dom
 const containerWidth = ref(0) // 容器的总宽度 （不含padding, margin, border）
 const containerLeft = ref(0) // 容器的左边距，item的left
 const columnWidth = ref(0) // 列宽 = (容器的宽度 - 所有的列间距宽度) / 列数
-const itemHeights = [] // 图片高度的集合
+let itemHeights = [] // 图片高度的集合
 
 /**
  * @description 构建记录每列高度的对象
@@ -124,7 +124,7 @@ const useItemLocation = () => {
  * @description 监听图片的加载完成, 需要预加载
  */
 const waitImageComplate = () => {
-  const itemHeights = []
+  itemHeights = []
   // 拿到所有的元素
   const itemElements = [...document.getElementsByClassName('m-waterfall-item')]
   // 获取到image标签
@@ -132,7 +132,7 @@ const waitImageComplate = () => {
   // 获取所有的 img 标签
   const allImgs = getAllImg(imgElements)
   // 等待图片加载完成
-  onComplateImgs(allImgs).then((res) => {
+  onComplateImgs(allImgs).then(() => {
     // 图片加载完成
     itemElements.forEach((el) => {
       itemHeights.push(el.offsetHeight)
@@ -147,7 +147,7 @@ const waitImageComplate = () => {
  * @description 不需要预加载的情况
  */
 const useItemHeight = () => {
-  const itemHeights = []
+  itemHeights = []
   const itemElements = [...document.getElementsByClassName('m-waterfall-item')]
   itemElements.forEach((el) => {
     itemHeights.push(el.offsetHeight)
