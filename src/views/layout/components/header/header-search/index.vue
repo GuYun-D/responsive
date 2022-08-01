@@ -2,7 +2,14 @@
   <div class="w-screen">
     <m-search v-model="modelValue">
       <template #dropdown>
-        <div>dropdown</div>
+        <div>
+          <!-- 搜索提示 -->
+          <Hint
+            @search-click="handleSearchItemClick"
+            v-show="modelValue"
+            :searchText="modelValue"
+          ></Hint>
+        </div>
       </template>
     </m-search>
   </div>
@@ -10,6 +17,11 @@
 
 <script setup>
 import { ref } from 'vue'
+import Hint from './hint.vue'
+
+const handleSearchItemClick = (item) => {
+  modelValue.value = item
+}
 
 const modelValue = ref('')
 </script>
