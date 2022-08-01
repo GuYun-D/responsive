@@ -19,12 +19,12 @@
 
       <li
         v-for="(item, index) in $store.getters.category"
-        class="text-zinc-900 dark:bg-zinc-500  dark:hover:text-zinc-300 text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 shrink-0 px-5 py-0 z-10 rounded mr-1 mb-1 duration-200"
+        class="text-zinc-900 dark:bg-zinc-500 dark:hover:text-zinc-300 text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 shrink-0 px-5 py-0 z-10 rounded mr-1 mb-1 duration-200"
         :key="item.id"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
         :class="{
           ' dark:bg-zinc-900 text-zinc-900 bg-zinc-200 dark:text-zinc-300':
-            currentCategoryIndex === index
+            $store.getters.currentCategoryIndex === index
         }"
       >
         {{ item.name }}
@@ -35,6 +35,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 /**
  * @description 切换菜单的展开和收起
@@ -44,11 +47,7 @@ const triggerState = () => {
   isOpenCategory.value = !isOpenCategory.value
 }
 
-/**
- * @description 选中菜单
- */
-const currentCategoryIndex = ref(0)
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onItemClick = (item) => {
+  store.commit('app/changeCurrentCategory', item)
 }
 </script>

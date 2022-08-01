@@ -3,12 +3,14 @@ import craetePersistedstate from 'vuex-persistedstate'
 import getters from './getters'
 import category from './modules/category'
 import theme from './modules/theme'
+import app from './modules/app'
 
 const store = createStore({
   getters,
   modules: {
     category,
-    theme
+    theme,
+    app
   },
   plugins: [craetePersistedstate({
     key: '', // 指定保存到 localstorage 中的 key

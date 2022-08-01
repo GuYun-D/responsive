@@ -4,9 +4,9 @@
       <ul class="overflow-y-scroll">
         <li
           class="text-lg dark:text-zinc-300 dark:active:bg-zinc-900 text-zinc-900 px-1 py-1.5 duration-100 active:bg-zinc-100"
-          v-for="(item, index) in $store.getters.category"
+          v-for="item in $store.getters.category"
           :key="item.id"
-          @click="$emit('nav-click', index)"
+          @click="$emit('nav-click', item)"
         >
           {{ item.name }}
         </li>

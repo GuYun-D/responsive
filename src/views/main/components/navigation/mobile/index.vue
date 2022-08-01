@@ -22,10 +22,10 @@
         v-for="(item, index) in $store.getters.category"
         :key="item.id"
         :class="{
-          ' text-zinc-100': currentCategoryIndex === index
+          ' text-zinc-100': $store.getters.currentCategoryIndex === index
         }"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
-        @click="onNavItemClick(index)"
+        @click="onNavItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -39,11 +39,12 @@
 
 <script setup>
 import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, watch } from '@vue/runtime-core'
 import MenuVue from '../../menu/index.vue'
 
-const currentCategoryIndex = ref(0)
+const store = useStore()
 const isVisiable = ref(false)
 
 const ulRef = ref()
@@ -59,8 +60,8 @@ const setNavItemRef = (navItem) => {
   }
 }
 
-const onNavItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onNavItemClick = (item) => {
+  store.commit('app/changeCurrentCategory', item)
   isVisiable.value = false
 }
 
@@ -77,7 +78,7 @@ onBeforeUpdate(() => {
 const { x: ulScrollLeft } = useScroll(ulRef)
 
 watch(
-  () => currentCategoryIndex.value,
+  () => store.getters.currentCategoryIndex,
   (val) => {
     const { width, left } = navItemRefs[val].getBoundingClientRect()
     sliderStyle.value = {

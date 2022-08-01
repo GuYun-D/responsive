@@ -1,5 +1,9 @@
 <template>
-  <m-infinite v-model="loading" :isFinished="isFinished" @onLoad="getPexlesData">
+  <m-infinite
+    v-model="loading"
+    :isFinished="isFinished"
+    @onLoad="getPexlesData"
+  >
     <m-waterfall
       class="px-1 w-full"
       :data="pexelsList"
@@ -16,11 +20,13 @@
 
 <script setup>
 import { getPexlesListApi } from '@/api/pexels'
+import { useStore } from 'vuex'
 import Item from './item.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { storeKey } from 'vuex'
 
-const query = {
+let query = {
   page: 1,
   size: 20
 }
@@ -28,6 +34,7 @@ const query = {
 const pexelsList = ref([])
 const loading = ref(false)
 const isFinished = ref(false)
+const store = useStore()
 /**
  * 获取列表信息
  */
@@ -59,6 +66,22 @@ const getPexlesData = async () => {
 }
 
 getPexlesData()
+
+const resetQuery = (newQuery) => {
+  query = { ...query, ...newQuery }
+  isFinished.value = false
+  pexelsList.value = []
+}
+
+watch(
+  () => store.getters.currentCategory,
+  (currentCategory) => {
+    resetQuery({
+      page: 1,
+      categoryId: currentCategory.id
+    })
+  }
+)
 </script>
 
 <style lang="scss" scoped></style>
