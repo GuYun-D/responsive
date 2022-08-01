@@ -6,5 +6,6 @@ export default {
     return getters.category.findIndex(item => {
       return item.id === getters.currentCategory.id
     })
-  }
+  },
+  historys: state => state.search.historys
 }
