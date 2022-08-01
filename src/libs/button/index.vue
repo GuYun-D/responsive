@@ -30,6 +30,7 @@
 
 <script>
 import { computed } from '@vue/runtime-core'
+import MSvgIcon from '../svg-icon/index.vue'
 const EVENTS_CLICK = 'click'
 
 const typeEnum = {

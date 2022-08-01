@@ -30,6 +30,7 @@
 
 <script setup>
 import { useStore } from 'vuex'
+import { confirm } from '@/libs'
 
 const store = useStore()
 
@@ -39,7 +40,14 @@ const emits = defineEmits(['search'])
  * @description 删除全部
  */
 const handleDeleteClick = () => {
-  store.commit('search/deleteAllHistory')
+  // store.commit('search/deleteAllHistory')
+  confirm('删除历史', '你要删除所有记录吗', '不删了', '麻溜的')
+    .then((res) => {
+      store.commit('search/deleteAllHistory')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 /**
