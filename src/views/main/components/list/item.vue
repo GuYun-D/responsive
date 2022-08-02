@@ -33,6 +33,7 @@
           size="small"
           icon="download"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="handleDownImg"
         ></m-button>
         <!-- 全屏 -->
         <m-button
@@ -60,7 +61,8 @@
 
 <script setup>
 import { randomRGB } from '@/utils/color'
-defineProps({
+import { saveAs } from 'file-saver'
+const props = defineProps({
   data: {
     type: Object,
     required: true
@@ -69,6 +71,13 @@ defineProps({
     type: Number
   }
 })
+
+/**
+ * @description 点击下载
+ */
+const handleDownImg = () => {
+  saveAs(props.data.photo)
+}
 </script>
 
 <style lang="scss" scoped></style>
