@@ -82,6 +82,16 @@ watch(
     })
   }
 )
+
+watch(
+  () => store.getters.searchText,
+  (val) => {
+    resetQuery({
+      page: 1,
+      categoryId: val
+    })
+  }
+)
 </script>
 
 <style lang="scss" scoped></style>

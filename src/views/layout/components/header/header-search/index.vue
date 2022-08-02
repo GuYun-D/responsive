@@ -15,6 +15,9 @@
             v-show="!modelValue"
             @search="handleSearchItemClick"
           ></History>
+
+          <!-- 推荐 -->
+          <Theme v-show="!modelValue"></Theme>
         </div>
       </template>
     </m-search>
@@ -26,14 +29,15 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import Hint from './hint.vue'
 import History from './history.vue'
+import Theme from './theme.vue'
 
 const store = useStore()
 
 const handleSearchItemClick = (item) => {
   modelValue.value = item
-  console.log("来了老弟", item);
   if (item) {
     store.commit('search/addHistory', item)
+    store.commit('app/changeSearchText', item)
   }
 }
 

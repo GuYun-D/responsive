@@ -7,12 +7,16 @@ export default {
   namespaced: true,
   state: () => {
     return {
-      currentCategory: ALL_CATEGORY_ITEM
+      currentCategory: ALL_CATEGORY_ITEM,
+      searchText: ''
     }
   },
   mutations: {
     changeCurrentCategory(state, currentCategory) {
       state.currentCategory = currentCategory
+    },
+    changeSearchText(state, searchText) {
+      state.searchText = searchText
     }
   }
 }
