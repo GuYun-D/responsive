@@ -62,6 +62,7 @@
 <script setup>
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
+import { message } from '@/libs'
 const props = defineProps({
   data: {
     type: Object,
@@ -76,6 +77,9 @@ const props = defineProps({
  * @description 点击下载
  */
 const handleDownImg = () => {
+  message('success', '图片开始下载', 3000, function(){
+    alert(1234)
+  })
   saveAs(props.data.photo)
 }
 </script>

@@ -20,7 +20,16 @@ module.exports = {
       },
       colors: {
         main: '#f44c58',
-        'hover-main': '#f32836'
+        'hover-main': '#f32836',
+        'success-100': "#f2f9ec",
+        'success-200': '#e4f2db',
+        'success-3000': '#7ec050',
+        'warn-100': '#fcf6ed',
+        'warn-200': '#f8ecda',
+        'warn-300': '#dca550',
+        'error-100': '#ed7456',
+        'error-200': '#f3471c',
+        'error-300': '#ffffff'
       }
     },
   },
