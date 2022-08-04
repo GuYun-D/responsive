@@ -10,6 +10,7 @@
       border-white
       duration-500
       hover:bgred100/40
+      guide-search
     "
   >
     <div>

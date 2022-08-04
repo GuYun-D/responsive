@@ -1,11 +1,19 @@
 <template>
   <div
-    class="duration-500 w-full dark:bg-zinc-800 dark:border-b-zinc-700 bg-white border-b border-b-zinc-200 py-1 px-2"
+    class="
+      duration-500
+      w-full
+      dark:bg-zinc-800 dark:border-b-zinc-700
+      bg-white
+      border-b border-b-zinc-200
+      py-1
+      px-2
+    "
   >
     <div class="flex items-center">
       <img
-          v-lazy
-        class="h-4 cursor-pointer mr-2"
+        v-lazy
+        class="h-4 cursor-pointer mr-2 guide-home"
         @click="toHome"
         src="https://img1.baidu.com/it/u=472952010,194694002&fm=253&fmt=auto&app=138&f=JPEG?w=240&h=180"
         alt=""

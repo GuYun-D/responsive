@@ -3,7 +3,18 @@
     <template #reference>
       <m-svg-icon
         :name="svgIconName"
-        class="dark:hover:bg-zinc-900 cursor-pointer w-4 h-4 p-1 rounded-sm duration-200 outline-none hover:bg-zinc-100/60"
+        class="
+          dark:hover:bg-zinc-900
+          cursor-pointer
+          w-4
+          h-4
+          p-1
+          rounded-sm
+          duration-200
+          outline-none
+          hover:bg-zinc-100/60
+           guide-theme
+        "
         fillClass="fill-zinc-900 dark:fill-zinc-300"
       ></m-svg-icon>
     </template>
@@ -13,7 +24,15 @@
         v-for="item in themes"
         :key="item.id"
         @click="changeTheme(item)"
-        class="dark:hover:bg-zinc-800 flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
+        class="
+          dark:hover:bg-zinc-800
+          flex
+          items-center
+          p-1
+          cursor-pointer
+          rounded
+          hover:bg-zinc-100/60
+        "
       >
         <m-svg-icon
           :name="item.icon"
