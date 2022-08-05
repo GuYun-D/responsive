@@ -12,9 +12,19 @@
       :picturePreReading="false"
     >
       <template v-slot="{ item, width }">
-        <Item :data="item" :width="width"></Item>
+        <Item :data="item" :width="width" @click="onToPins"></Item>
       </template>
     </m-waterfall>
+
+    <!-- 详情内容展示 -->
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
+    >
+      <Pins v-if="isVisiblePins" :id="currentPins.id"></Pins>
+    </transition>
   </m-infinite>
 </template>
 
@@ -22,9 +32,10 @@
 import { getPexlesListApi } from '@/api/pexels'
 import { useStore } from 'vuex'
 import Item from './item.vue'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { storeKey } from 'vuex'
+import Pins from '../../../pins/components/pins.vue'
 
 let query = {
   page: 1,
@@ -35,6 +46,9 @@ const pexelsList = ref([])
 const loading = ref(false)
 const isFinished = ref(false)
 const store = useStore()
+const isVisiblePins = ref(false)
+const currentPins = ref({})
+
 /**
  * 获取列表信息
  */
@@ -72,6 +86,20 @@ const resetQuery = (newQuery) => {
   isFinished.value = false
   pexelsList.value = []
 }
+
+/**
+ * @description 进入 pins 修改url，不跳转页面
+ */
+const onToPins = (item) => {
+  history.pushState(null, null, `/pins/${item.id}`)
+  isVisiblePins.value = true
+  currentPins.value = item
+  console.log(item)
+}
+
+/**
+ * @description
+ */
 
 watch(
   () => store.getters.currentCategory,

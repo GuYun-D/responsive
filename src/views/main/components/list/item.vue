@@ -3,6 +3,7 @@
     <div
       :style="{ background: randomRGB() }"
       class="relative w-full rounded cursor-zoom-in group"
+      @click="handleToPins"
     >
       <img
         v-lazy
@@ -16,7 +17,20 @@
       />
       <!-- hover mask -->
       <div
-        class="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 left-0 rounded duration-300 group-hover:opacity-100 xl:block"
+        class="
+          hidden
+          opacity-0
+          w-full
+          h-full
+          bg-zinc-900/50
+          absolute
+          top-0
+          left-0
+          rounded
+          duration-300
+          group-hover:opacity-100
+          xl:block
+        "
       >
         <!-- 分享 -->
         <m-button class="absolute top-1.5 left-1.5">分享</m-button>
@@ -62,7 +76,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useElementBounding } from '@vueuse/core'
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
 import { message } from '@/libs'
@@ -77,18 +92,42 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits(['click'])
+
 /**
  * @description 点击下载
  */
 const handleDownImg = () => {
-  message('success', '图片开始下载', 3000, function () {
-    alert(1234)
-  })
+  message('success', '图片开始下载', 3000, function () {})
   saveAs(props.data.photo)
 }
 
 const imgRef = ref(null)
 const { enter: onImgFullscreen } = useFullscreen(imgRef)
+
+/**
+ * 计算 pins 的跳转记录
+ * @description 记录图片的中心点 ： (x | y 位置 + 宽 | 高 一半 )
+ */
+const {
+  x: imgContainerX,
+  y: imgContainerY,
+  width: imgContainerWidth,
+  height: imgContainerHeigth
+} = useElementBounding(imgRef)
+const imgContainer = computed(() => {
+  return {
+    translateX: parseInt(imgContainerX.value + imgContainerWidth.value / 2),
+    translateY: parseInt(imgContainerY.value + imgContainerHeigth.value / 2)
+  }
+})
+
+/**
+ * @description 进入详情的点击事件
+ */
+const handleToPins = () => {
+  emits('click', { id: props.data.id, location: imgContainer.value })
+}
 </script>
 
 <style lang="scss" scoped></style>
