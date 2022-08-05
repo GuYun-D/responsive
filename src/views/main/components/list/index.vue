@@ -31,11 +31,13 @@
 <script setup>
 import { getPexlesListApi } from '@/api/pexels'
 import { useStore } from 'vuex'
+import gsap from 'gsap'
 import Item from './item.vue'
 import { computed, ref, watch } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
 import { storeKey } from 'vuex'
 import Pins from '../../../pins/components/pins.vue'
+import { useEventListener } from '@vueuse/core'
 
 let query = {
   page: 1,
@@ -95,6 +97,48 @@ const onToPins = (item) => {
   isVisiblePins.value = true
   currentPins.value = item
   console.log(item)
+}
+
+/**
+ * @description 监听浏览器的后退事件
+ */
+useEventListener(window, 'popstate', () => {
+  isVisiblePins.value = false
+})
+
+const beforeEnter = (el) => {
+  gsap.set(el, {
+    scaleX: 0,
+    scaleY: 0,
+    transformOrigin: '0 0',
+    translateX: currentPins.value.location?.translateX,
+    translateY: currentPins.value.location?.translateY,
+    opacity: 0
+  })
+}
+
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 1,
+    scaleY: 1,
+    translateX: 0,
+    translateY: 0,
+    opacity: 1,
+    onComplete: done
+  })
+}
+
+const leave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 0,
+    scaleY: 0,
+    translateX: currentPins.value.location?.translateX,
+    translateY: currentPins.value.location?.translateY,
+    opacity: 1,
+    onComplete: done
+  })
 }
 
 /**
