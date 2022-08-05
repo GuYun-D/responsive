@@ -22,7 +22,7 @@
       <slot name="left">
         <m-svg-icon
           name="back"
-          class="w-2 h-2"
+          class="w-2 h-2 cursor-pointer"
           fillClass="fill-zinc-900 dark:fill-zinc-200"
         ></m-svg-icon>
       </slot>

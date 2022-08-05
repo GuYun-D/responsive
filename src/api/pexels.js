@@ -30,3 +30,12 @@ export const getThemes = () => {
     url: '/pexels/themes'
   })
 }
+
+/**
+ * 获取主题
+ */
+export const getDetailByIdApi = id => {
+  return request({
+    url: `/pexels/${id}`
+  })
+}
