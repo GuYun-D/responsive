@@ -1,8 +1,21 @@
 <template>
-  <m-popover class="guide-my flex items-center" placement="bottom-left">
+  <m-popover class="flex items-center" placement="bottom-left">
     <template #reference>
       <div
-        class="dark:hover:bg-zinc-900 relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
+        v-if="false"
+        class="
+          guide-my
+          dark:hover:bg-zinc-900
+          relative
+          flex
+          items-center
+          p-0.5
+          rounded-sm
+          cursor-pointer
+          duration-200
+          outline-none
+          hover:bg-zinc-100
+        "
       >
         <img
           v-lazy
@@ -24,11 +37,28 @@
         >
         </m-svg-icon>
       </div>
+
+      <div v-else>
+        <m-button
+          class="guide-my"
+          icon="profile"
+          @click="handlelogin"
+          iconColor="#fff"
+        ></m-button>
+      </div>
     </template>
 
-    <div class="w-[140px] overflow-hidden">
+    <div v-if="false" class="w-[140px] overflow-hidden">
       <div
-        class="flex dark:hover:bg-zinc-800 items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
+        class="
+          flex
+          dark:hover:bg-zinc-800
+          items-center
+          p-1
+          cursor-pointer
+          rounded
+          hover:bg-zinc-100/60
+        "
         v-for="item in menus"
         :key="item.id"
       >
@@ -46,6 +76,10 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const menus = [
   {
     id: 0,
@@ -66,6 +100,13 @@ const menus = [
     path: ''
   }
 ]
+
+/**
+ * @description 点击登录
+ */
+const handlelogin = () => {
+  router.push('/login')
+}
 </script>
 
 <style lang="scss" scoped></style>
