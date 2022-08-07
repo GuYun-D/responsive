@@ -57,6 +57,7 @@
           placeholder="用户名"
           autocomplete="on"
           :rules="validateUsername"
+          v-model="loginForm.username"
         />
 
         <ErrorMessage
@@ -82,6 +83,7 @@
           placeholder="密码"
           autocomplete="on"
           :rules="validatePassword"
+          v-model="loginForm.password"
         />
 
         <ErrorMessage
@@ -109,7 +111,9 @@
         </div>
 
         <!-- 登陆按钮 -->
-        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
+        <m-button
+          :loading="loading"
+          class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
           >登录</m-button
         >
       </Form>
@@ -120,15 +124,60 @@
         <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
       </div>
     </div>
+
+    <SilderCatche
+      v-if="isSilderCaptchVisiable"
+      @close="isSilderCaptchVisiable = false"
+      @success="handleCaptcha"
+    ></SilderCatche>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import Hearder from '../components/header.vue'
 import { validateUsername, validatePassword } from '../validate'
+import SilderCatche from './slider-captche.vue'
 
+const router = useRouter()
+const isSilderCaptchVisiable = ref(false)
+const loading = ref(false)
+const store = useStore()
+const loginForm = ref({
+  username: 'admin1',
+  password: 'admin12345'
+})
+
+/**
+ * @description 点击登录，触发
+ */
 const handleLogin = () => {
-  console.log(1)
+  isSilderCaptchVisiable.value = true
+}
+
+/**
+ * 登录
+ */
+const onLogin = () => {
+  loading.value = true
+
+  try {
+    store.dispatch('user/login', { ...loginForm.value })
+  } finally {
+    loading.value = false
+  }
+
+  router.push('/')
+}
+
+/**
+ * 验证通过，触发登录
+ */
+const handleCaptcha = () => {
+  isSilderCaptchVisiable.value = false
+  onLogin()
 }
 </script>

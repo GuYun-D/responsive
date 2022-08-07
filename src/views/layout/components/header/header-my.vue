@@ -2,7 +2,7 @@
   <m-popover class="flex items-center" placement="bottom-left">
     <template #reference>
       <div
-        v-if="false"
+        v-if="$store.getters.token"
         class="
           guide-my
           dark:hover:bg-zinc-900
@@ -20,7 +20,7 @@
         <img
           v-lazy
           class="w-3 h-3 rounded"
-          src="https://img0.baidu.com/it/u=1776260030,3350744143&fm=253&fmt=auto&app=138&f=JPEG?w=250&h=300"
+          :src="$store.getters.userInfo.avatar"
           alt=""
         />
         <m-svg-icon
@@ -48,7 +48,7 @@
       </div>
     </template>
 
-    <div v-if="false" class="w-[140px] overflow-hidden">
+    <div v-if="$store.getters.token" class="w-[140px] overflow-hidden">
       <div
         class="
           flex
