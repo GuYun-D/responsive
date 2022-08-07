@@ -36,10 +36,20 @@ export default {
       dispatch('getUserProfile')
     },
 
+    /**
+     * @description 获取用户信息
+     * @param {*} param0 
+     */
     async getUserProfile({ commit }) {
       const res = await getProfile()
       commit('setUserInfo', res)
       message('success', '欢迎回来')
+    },
+
+    async logout({ commit }) {
+      commit('setToken', '')
+      commit('setUserInfo', {})
+      location.reload()
     }
   }
 }

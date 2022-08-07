@@ -61,6 +61,7 @@
         "
         v-for="item in menus"
         :key="item.id"
+        @click="handleClickItem(item.id)"
       >
         <m-svg-icon
           fileClass="fill-zinc-900 dark:fill-zinc-200"
@@ -77,8 +78,11 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { confirm } from '../../../../libs/confirm'
 
 const router = useRouter()
+const store = useStore()
 
 const menus = [
   {
@@ -106,6 +110,17 @@ const menus = [
  */
 const handlelogin = () => {
   router.push('/login')
+}
+
+/**
+ * @description
+ */
+const handleClickItem = (id) => {
+  if (id === 2) {
+    confirm('您确定要退出登录').then(() => {
+      store.dispatch('user/logout')
+    })
+  }
 }
 </script>
 
