@@ -22,6 +22,14 @@ service.interceptors.response.use(response => {
   }
 
   return Promise.reject(new Error(message))
-})
+},
+  (error) => {
+    if (error.response && error.response && error.response.data.code === 401) {
+      store.dispatch('user/logout')
+    }
+
+    return Promise.reject(error)
+  }
+)
 
 export default service
