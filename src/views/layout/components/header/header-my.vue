@@ -120,7 +120,11 @@ const handleClickItem = (id) => {
     confirm('您确定要退出登录').then(() => {
       store.dispatch('user/logout')
     })
+
+    return
   }
+
+  router.push('/profile')
 }
 </script>
 
