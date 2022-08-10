@@ -30,3 +30,14 @@ export const getProfile = () => {
     url: '/user/profile'
   })
 }
+
+/**
+ * 修改信息
+ */
+export const editProfile = data => {
+  return request({
+    url: '/user/edit',
+    method: 'put',
+    data
+  })
+}

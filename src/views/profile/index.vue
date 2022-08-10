@@ -142,6 +142,8 @@
         </div>
 
         <m-button
+          :loading="isLoading"
+          @click="saveInfo"
           class="
             w-full
             mt-2
@@ -176,7 +178,9 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { isMobileTerminal } from '@/utils/flexible'
 import { confirm } from '@/libs/confirm'
+import { message } from '../../libs/message'
 import { useRouter } from 'vue-router'
+import { editProfile } from '@/api/sys'
 
 const cao = ref({
   name: '',
@@ -189,6 +193,7 @@ const cao = ref({
 const store = useStore()
 const router = useRouter()
 const inputFileRef = ref(null)
+const isLoading = ref(false)
 
 /**
  * @description 左侧点击事件
@@ -216,5 +221,16 @@ const handleLagout = () => {
 const handleClickUploadAvatar = () => {
   console.log(11111)
   inputFileRef.value.click()
+}
+
+/**
+ * 保存修改
+ */
+const saveInfo = async () => {
+  isLoading.value = true
+  await editProfile(cao.value)
+  message('success', '修改成功')
+  isLoading.value = false
+  router.back()
 }
 </script>
