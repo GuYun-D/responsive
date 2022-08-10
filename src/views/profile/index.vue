@@ -170,17 +170,42 @@
         </m-button>
       </div>
     </div>
+
+    <!-- PC 端 -->
+    <m-dialog
+      v-if="!isMobileTerminal"
+      title="裁剪头像"
+      v-model="isDialogVisible"
+    >
+      <ChangeAvatar
+        @click="isDialogVisible = false"
+        :blob="cuurentBlob"
+      ></ChangeAvatar>
+    </m-dialog>
+
+    <!-- 移动端 -->
+    <m-popup
+      :class="{ 'h-screen': isDialogVisible }"
+      v-model="isDialogVisible"
+      v-else
+    >
+      <ChangeAvatar
+        @click="isDialogVisible = false"
+        :blob="cuurentBlob"
+      ></ChangeAvatar>
+    </m-popup>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { isMobileTerminal } from '@/utils/flexible'
 import { confirm } from '@/libs/confirm'
 import { message } from '../../libs/message'
 import { useRouter } from 'vue-router'
 import { editProfile } from '@/api/sys'
+import ChangeAvatar from './components/change-avatar.vue'
 
 const cao = ref({
   name: '',
@@ -194,6 +219,8 @@ const store = useStore()
 const router = useRouter()
 const inputFileRef = ref(null)
 const isLoading = ref(false)
+const isDialogVisible = ref(false)
+const cuurentBlob = ref('')
 
 /**
  * @description 左侧点击事件
@@ -203,7 +230,29 @@ const handelClickLeft = () => {}
 /**
  * @description 上传图片
  */
-const handleUploadImg = () => {}
+const handleUploadImg = () => {
+  // 获取选中的文件
+  const imgFile = inputFileRef.value.files[0]
+  //  生成 blob 对象（类文件对象）
+  const blob = URL.createObjectURL(imgFile)
+  cuurentBlob.value = blob
+  // 展示dialog
+  isDialogVisible.value = true
+}
+
+/**
+ * 当两次选择的文件相同时，上传图片的change事件不再进行触发
+ * 在不需要使用选择的文件时，清空掉 inputFileRef 的 value 就行了
+ * popup被关闭时就不需要了
+ */
+watch(
+  () => isDialogVisible.value,
+  (val) => {
+    if (!val) {
+      inputFileRef.value.value = null
+    }
+  }
+)
 
 /**
  * @description 退出登录
@@ -219,7 +268,6 @@ const handleLagout = () => {
  * @description 点击头像上传
  */
 const handleClickUploadAvatar = () => {
-  console.log(11111)
   inputFileRef.value.click()
 }
 
