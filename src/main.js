@@ -9,7 +9,13 @@ import mDirectives from './directives'
 // 注册 svg-icons
 import 'virtual:svg-icons-register'
 import useTheme from './utils/theme'
+import './permission.js'
 
 useTheme()
 useREM()
-createApp(App).use(store).use(router).use(MobileComponent).use(mDirectives).mount('#app')
+createApp(App)
+  .use(store)
+  .use(router)
+  .use(MobileComponent)
+  .use(mDirectives)
+  .mount('#app')
